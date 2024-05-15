@@ -70,7 +70,7 @@ public class Jogador {
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter(caminhoFicheiro.toFile(),true))) {
                     writer.write("INICIO");
                     writer.newLine();
-                    writer.write(this.nome+ " "+this.apelido+" "+this.qualidade+" "+this.posicao+"("+this.cartoes[0]+","+this.cartoes[1]+","+this.cartoes[2]+") "+this.dataNascimento.toString()+" "+this.numero+" "+this.suspenso+" "+this.treinamento);
+                    writer.write(this.id+" "+this.nome+ " "+this.apelido+" "+this.dataNascimento.toString()+" "+this.numero+" "+this.posicao+" "+this.qualidade+" ("+this.cartoes[0]+","+this.cartoes[1]+","+this.cartoes[2]+") "+this.suspenso+" "+this.treinamento);
                     writer.newLine();
                     writer.write("FIM");
                     writer.newLine();
