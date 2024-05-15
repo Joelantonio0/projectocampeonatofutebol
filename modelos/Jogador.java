@@ -30,6 +30,14 @@ public class Jogador {
         }
     }
 
+    public Boolean getTreinamento() {
+        return treinamento;
+    }
+
+    public void setTreinamento(Boolean treinamento) {
+        this.treinamento = treinamento;
+    }
+
     public Jogador(Integer id, String nome, String apelido, Date dataNascimento, Integer numero, String posicao,
                    Double qualidade, Cartoes[] cartoes, Boolean suspenso) {
         this.id = id;

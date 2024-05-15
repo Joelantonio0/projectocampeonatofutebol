@@ -56,20 +56,13 @@ public class Equipa {
                     writer.newLine();
                     writer.write("Jogadores:");
                     for (Jogador jogador: this.jogadores){
-                        writer.write("("+jogador.getId()+","+jogador.getNome()+")");
+                        writer.write("("+jogador.getId()+" "+jogador.getNome()+ " "+jogador.getApelido()+" "+jogador.getDataNascimento().toString()+" "+jogador.getNumero()+" "+jogador.getPosicao()+" "+jogador.getQualidade()+" ("+jogador.getCartoes()[0]+","+jogador.getCartoes()[1]+","+jogador.getCartoes()[2]+") "+jogador.getSuspenso()+" "+jogador.getTreinamento()+")");
                     }
-                     writer.newLine();
+                    writer.newLine();
                     writer.write("Relacionados:");
-                    for (Jogador relacionado : this.relacionados){
-                        writer.write("("+relacionado.getId()+","+relacionado.getNome()+")");
+                    for (Jogador jogador : this.relacionados){
+                        writer.write("("+jogador.getId()+" "+jogador.getNome()+ " "+jogador.getApelido()+" "+jogador.getDataNascimento().toString()+" "+jogador.getNumero()+" "+jogador.getPosicao()+" "+jogador.getQualidade()+" ("+jogador.getCartoes()[0]+","+jogador.getCartoes()[1]+","+jogador.getCartoes()[2]+") "+jogador.getSuspenso()+" "+jogador.getTreinamento()+")");
                     }
-                    for (Jogador relacionado : this.relacionados){
-                        writer.write("("+relacionado.getId()+","+relacionado.getNome()+")");
-                    }
-                    for (Jogador relacionado : this.relacionados){
-                        writer.write("("+relacionado.getId()+","+relacionado.getNome()+")");
-                    }
-
                     writer.newLine();
                     writer.write("FIM");
                     writer.newLine();
@@ -128,7 +121,66 @@ public class Equipa {
         this.relacionados = relacionados;
     }
 
-    public void cadastrarJogadores() {
-        // Método a ser implementado
+    public void cadastrarJogadores(List<Jogador> jogadores) {
+        if(jogadores.size()<=23)
+            this.jogadores = jogadores;
+        else
+            System.out.println("Não foi possível cadastrar jogadores: verifique as quantidades!");
     }
+    public List<Jogador> relacionarJogadores() {
+        List<Jogador> naoRelacionados = new ArrayList<>();
+        List<Jogador> relacionados = new ArrayList<>();
+
+        // Criar uma cópia da lista de jogadores para iterar
+        List<Jogador> copiaJogadores = new ArrayList<>(this.jogadores);
+
+        // Iterar sobre a lista de jogadores
+        for (Jogador jogador : copiaJogadores) {
+            boolean adicionado = false;
+
+            for (Jogador rel : relacionados) {
+                if (jogador.getPosicao().equals(rel.getPosicao())) {
+                    if (jogador.getQualidade() > rel.getQualidade()) {
+                        relacionados.remove(rel);
+                        relacionados.add(jogador);
+                        naoRelacionados.add(rel);
+                        adicionado = true;
+                        break;
+                    } else {
+                        naoRelacionados.add(jogador);
+                        adicionado = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!adicionado) {
+                relacionados.add(jogador);
+            }
+        }
+
+        // Selecionar os suplentes
+        relacionados.sort((j1, j2) -> Double.compare(j2.getQualidade(), j1.getQualidade()));
+        List<Jogador> suplentes = relacionados.subList(0, Math.min(relacionados.size(), 23));
+        naoRelacionados.addAll(relacionados.subList(Math.min(relacionados.size(), 23), relacionados.size()));
+        naoRelacionados.sort((j1,j2) -> Double.compare(j2.getQualidade(), j1.getQualidade()));
+        int numJogadores=1;
+
+        this.relacionados = new ArrayList<>(suplentes);
+        for (int i = 0; i < naoRelacionados.size() ; i++) {
+            if(numJogadores<7){
+                this.relacionados.add(naoRelacionados.get(i));
+                System.out.println(numJogadores+"");
+                numJogadores++;
+            }
+        }
+        //removendo os jogadores que já subiram como suplentes para relacionados
+        for (int i = 0; i < 6; i++) {
+            naoRelacionados.remove(naoRelacionados.removeFirst());
+        }
+        this.jogadores = new ArrayList<>(naoRelacionados);
+
+        return naoRelacionados;
+    }
+
 }
