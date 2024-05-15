@@ -10,6 +10,8 @@ import projectocampeonatofutebol.enums.Cartoes;
 import projectocampeonatofutebol.modelos.Equipa;
 import projectocampeonatofutebol.modelos.Jogador;
 
+import static java.time.LocalDate.*;
+
 public class Main {
     public static void main(String[] args) {
         List<Jogador> jogadores = new ArrayList<>();
@@ -19,7 +21,7 @@ public class Main {
         cartoes[2] = Cartoes.AMARELO;
 
         // Vamos criar uma data de nascimento válida
-        LocalDate dataNascimento = LocalDate.of(1990, 1, 1);
+        LocalDate dataNascimento = of(1990, 1, 1);
 
         // Criando um jogador com todos os parâmetros necessários
         Jogador j1 = new Jogador(1, "Joel", "Lucas", Date.valueOf(dataNascimento),11, "AVANÇADO", 82.0, cartoes, false);
