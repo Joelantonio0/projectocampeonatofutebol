@@ -1,0 +1,5 @@
+INICIO
+Barcelona Barça FUND 
+Jogadores:(1,Joel)(2,Lucas)(3,Correia)(4,António)(5,Pedro)(6,João)
+Relacionados:(1,Pirão)(2,Zé)(3,Correia)(4,Da Rosa)(5,Pedrinha)(6,Machado)(1,Pirão)(2,Zé)(3,Correia)(4,Da Rosa)(5,Pedrinha)(6,Machado)(1,Pirão)(2,Zé)(3,Correia)(4,Da Rosa)(5,Pedrinha)(6,Machado)
+FIM

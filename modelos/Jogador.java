@@ -1,5 +1,11 @@
 package projectocampeonatofutebol.modelos;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.Random;
 
@@ -35,6 +41,48 @@ public class Jogador {
         this.qualidade = qualidade;
         this.cartoes = cartoes;
         this.suspenso = suspenso;
+        try {
+            // Obtém o diretório atual do projeto
+            String diretorioProjeto = System.getProperty("user.dir");
+            System.out.println("Diretório do projeto: " + diretorioProjeto);
+
+            // Define o caminho relativo para o diretório 'ficheiros' na raiz do projeto
+            Path caminhoRelativo = Paths.get(diretorioProjeto, "ficheiros");
+
+            try {
+                // Cria o diretório se não existir
+                if (Files.notExists(caminhoRelativo)) {
+                    Files.createDirectories(caminhoRelativo);
+                    System.out.println("Diretório criado com sucesso: " + caminhoRelativo.toString());
+                } else {
+                    System.out.println("Diretório já existe: " + caminhoRelativo.toString());
+                }
+                // Define o caminho para o novo ficheiro na pasta 'ficheiros'
+                Path caminhoFicheiro = Paths.get(caminhoRelativo.toString(), "Jogadores.txt");
+                // Cria o ficheiro se não existir
+                if (Files.notExists(caminhoFicheiro)) {
+                    Files.createFile(caminhoFicheiro);
+                    System.out.println("Ficheiro criado com sucesso: " + caminhoFicheiro.toString());
+                } else {
+                    System.out.println("Ficheiro já existe: " + caminhoFicheiro.toString());
+                }
+                // Escreve conteúdo no ficheiro
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(caminhoFicheiro.toFile(),true))) {
+                    writer.write("INICIO");
+                    writer.newLine();
+                    writer.write(this.nome+ " "+this.apelido+" "+this.qualidade+" "+this.posicao+"("+this.cartoes[0]+","+this.cartoes[1]+","+this.cartoes[2]+") "+this.dataNascimento.toString()+" "+this.numero+" "+this.suspenso+" "+this.treinamento);
+                    writer.newLine();
+                    writer.write("FIM");
+                    writer.newLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public Integer getId() {
@@ -157,6 +205,12 @@ public class Jogador {
         else this.qualidade -= 1;
         System.out.println(this.qualidade);
     }
+
+    public Jogador(Integer id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
+
     public void executarTreinamento(){
         Random random = new Random();
         int[] valoresPossiveis = {5,10,15,30,40};
@@ -185,6 +239,7 @@ public class Jogador {
             }
         }
         System.out.println("Qualidade aumentada:"+this.qualidade);
+
     }
 }
         
