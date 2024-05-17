@@ -183,4 +183,72 @@ public class Equipa {
         return naoRelacionados;
     }
 
+    public void ImprimirEscalacoes(){
+        List<Jogador> copiaRelacionados = this.relacionados;
+        System.out.println("--------------------------------PLANTEL "+this.nome.toUpperCase()+" ---------------------------------------");
+        int jogadoresEmCampo = 0;
+        for (Jogador relacionados : copiaRelacionados){
+            if(relacionados.getPosicao().equals("GOLEIRO"))
+                System.out.print("GOLEIRO: ");
+            else if(relacionados.getPosicao().equals("MEIO-ARMADOR"))
+                System.out.print("MEIO-ARMADOR: ");
+            else if(relacionados.getPosicao().equals("MEIO-ATACANTE"))
+                System.out.print("MEIO-ATACANTE: ");
+            else if(relacionados.getPosicao().equals("ZAGUEIRO-CENTRAL"))
+                System.out.print("ZAGUEIRO-CENTRAL: ");
+            else if(relacionados.getPosicao().equals("ALA-ESQUERDA"))
+                System.out.print("ALA-ESQUERDA: ");
+            else if(relacionados.getPosicao().equals("ALA-DIREITA"))
+                System.out.print("ALA-DIREITA: ");
+            else if(relacionados.getPosicao().equals("ZAGUEIRO"))
+                System.out.print("ZAGUEIRO: ");
+            else if(relacionados.getPosicao().equals("LATERAL-DIREITO"))
+                System.out.print("LATERAL-DIREITO: ");
+            else if(relacionados.getPosicao().equals("AVANÇADO"))
+                System.out.print("AVANÇADO: ");
+            else if(relacionados.getPosicao().equals("LATERAL-ESQUERDO"))
+                System.out.print("LATERAL-ESQUERDO: ");
+            else if(relacionados.getPosicao().equals("VOLANTE"))
+                System.out.print("VOLANTE: ");
+            if(jogadoresEmCampo<11) {
+                System.out.println(relacionados.getId()+" "+relacionados.getNome() + " " + relacionados.getApelido() + " " +relacionados.getDataNascimento().toString() + " " + (relacionados.getSuspenso()?"SUSPENSO":"TÁ PRA JOGO"));
+                jogadoresEmCampo++;
+            }
+        }
+        System.out.println();
+        System.out.println("--------------------------------------SUPLENTES------------------------------------------------------------");
+        for (int i=jogadoresEmCampo;i<17;i++){
+            if(copiaRelacionados.get(i).getPosicao().equals("GOLEIRO"))
+                System.out.print("GOLEIRO: ");
+            else if(copiaRelacionados.get(i).getPosicao().equals("MEIO-ARMADOR"))
+                System.out.print("MEIO-ARMADOR: ");
+            else if(copiaRelacionados.get(i).getPosicao().equals("MEIO-ATACANTE"))
+                System.out.print("MEIO-ATACANTE: ");
+            else if(copiaRelacionados.get(i).getPosicao().equals("ZAGUEIRO-CENTRAL"))
+                System.out.print("ZAGUEIRO-CENTRAL: ");
+            else if(copiaRelacionados.get(i).getPosicao().equals("ALA-ESQUERDA"))
+                System.out.print("ALA-ESQUERDA: ");
+            else if(copiaRelacionados.get(i).getPosicao().equals("ALA-DIREITA"))
+                System.out.print("ALA-DIREITA: ");
+            else if(copiaRelacionados.get(i).getPosicao().equals("ZAGUEIRO"))
+                System.out.print("ZAGUEIRO: ");
+            else if(copiaRelacionados.get(i).getPosicao().equals("LATERAL-DIREITO"))
+                System.out.print("LATERAL-DIREITO: ");
+            else if(copiaRelacionados.get(i).getPosicao().equals("AVANÇADO"))
+                System.out.print("AVANÇADO: ");
+            else if(copiaRelacionados.get(i).getPosicao().equals("LATERAL-ESQUERDO"))
+                System.out.print("LATERAL-ESQUERDO: ");
+            else if(copiaRelacionados.get(i).getPosicao().equals("VOLANTE"))
+                System.out.print("VOLANTE: ");
+            System.out.println(copiaRelacionados.get(i).getId()+" "+copiaRelacionados.get(i).getNome() + " " + copiaRelacionados.get(i).getApelido() + " " +copiaRelacionados.get(i).getDataNascimento().toString() + " " + (copiaRelacionados.get(i).getSuspenso()?"SUSPENSO":"TÁ PRA JOGO"));
+        }
+        //System.out.println("-----------------------------------------------------------------------------------------------------------");
+        //System.out.println("|                              |             "+copiaRelacionados.get(2).getNome()+"                                      |                |");
+        //System.out.println("|                              |                                                          |                |");
+        //System.out.println("|                              |                                                          |                |");
+        //System.out.println("|                              |                                                          |                |");
+        //System.out.println("|                              ------------------------------------------------------------                |");
+        //System.out.println("|                                                                                                          |");
+        //System.out.println("|        "+copiaRelacionados.get(10).getNome()+"                                              "+copiaRelacionados.get(4).getNome()+"                            "+copiaRelacionados.get(8).getNome()+"         |");
+    }
 }
