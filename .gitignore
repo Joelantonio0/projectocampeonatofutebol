@@ -1,0 +1,12 @@
+# Ignorar arquivos e diretórios da IDE
+.idea/
+*.iml
+
+# Ignorar bibliotecas
+*.jar
+
+# Ignorar diretórios de saída de compilação
+out/
+
+# Ignorar arquivos de configuração específicos
+*.xml
