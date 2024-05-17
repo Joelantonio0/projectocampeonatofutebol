@@ -24,6 +24,7 @@ public class Jogador {
 
     private Boolean treinamento = false;
 
+    private int indice = 0;
     public Jogador() {
         for (int i = 0; i < cartoes.length; i++) {
             cartoes[i] = null;
@@ -38,6 +39,14 @@ public class Jogador {
         this.treinamento = treinamento;
     }
 
+    public int getIndice() {
+        return indice;
+    }
+
+    public void setIndice(int indice) {
+        this.indice = indice;
+    }
+
     public Jogador(Integer id, String nome, String apelido, Date dataNascimento, Integer numero, String posicao,
                    Double qualidade, Cartoes[] cartoes, Boolean suspenso) {
         this.id = id;
@@ -49,48 +58,6 @@ public class Jogador {
         this.qualidade = qualidade;
         this.cartoes = cartoes;
         this.suspenso = suspenso;
-        try {
-            // Obtém o diretório atual do projeto
-            String diretorioProjeto = System.getProperty("user.dir");
-            System.out.println("Diretório do projeto: " + diretorioProjeto);
-
-            // Define o caminho relativo para o diretório 'ficheiros' na raiz do projeto
-            Path caminhoRelativo = Paths.get(diretorioProjeto, "ficheiros");
-
-            try {
-                // Cria o diretório se não existir
-                if (Files.notExists(caminhoRelativo)) {
-                    Files.createDirectories(caminhoRelativo);
-                    System.out.println("Diretório criado com sucesso: " + caminhoRelativo.toString());
-                } else {
-                    System.out.println("Diretório já existe: " + caminhoRelativo.toString());
-                }
-                // Define o caminho para o novo ficheiro na pasta 'ficheiros'
-                Path caminhoFicheiro = Paths.get(caminhoRelativo.toString(), "Jogadores.txt");
-                // Cria o ficheiro se não existir
-                if (Files.notExists(caminhoFicheiro)) {
-                    Files.createFile(caminhoFicheiro);
-                    System.out.println("Ficheiro criado com sucesso: " + caminhoFicheiro.toString());
-                } else {
-                    System.out.println("Ficheiro já existe: " + caminhoFicheiro.toString());
-                }
-                // Escreve conteúdo no ficheiro
-                try (BufferedWriter writer = new BufferedWriter(new FileWriter(caminhoFicheiro.toFile(),true))) {
-                    writer.write("INICIO");
-                    writer.newLine();
-                    writer.write(this.id+" "+this.nome+ " "+this.apelido+" "+this.dataNascimento.toString()+" "+this.numero+" "+this.posicao+" "+this.qualidade+" ("+this.cartoes[0]+","+this.cartoes[1]+","+this.cartoes[2]+") "+this.suspenso+" "+this.treinamento);
-                    writer.newLine();
-                    writer.write("FIM");
-                    writer.newLine();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public Integer getId() {
@@ -183,11 +150,15 @@ public class Jogador {
         return condicao;
     }
 
-    public void aplicarCartao(int indice, Cartoes cartao) {
-        if (indice >= 0 && indice < cartoes.length) {
+    public void aplicarCartao(Cartoes cartao) {
+        if (this.indice >= 0 && this.indice < cartoes.length) {
             cartoes[indice] = cartao;
+            indice++;
         }
         verificarCondicaoJogo();
+    }
+    public boolean podeReceberCartao(){
+        return this.cartoes[0]!=null || this.cartoes[1]!=null || this.cartoes[2]!=null;
     }
 
     public void cumprirSuspensao() {
@@ -245,6 +216,7 @@ public class Jogador {
                 if(this.qualidade!=100)
                     this.qualidade += 1.0;
             }
+            this.treinamento=false;
         }
         System.out.println("Qualidade aumentada:"+this.qualidade);
 

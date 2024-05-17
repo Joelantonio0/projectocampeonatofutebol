@@ -23,58 +23,6 @@ public class Equipa {
         this.fundacao = fundacao;
         this.jogadores = jogadores;
         this.relacionados = relacionados;
-        try {
-            // Obtém o diretório atual do projeto
-            String diretorioProjeto = System.getProperty("user.dir");
-            System.out.println("Diretório do projeto: " + diretorioProjeto);
-
-            // Define o caminho relativo para o diretório 'ficheiros' na raiz do projeto
-            Path caminhoRelativo = Paths.get(diretorioProjeto, "ficheiros");
-
-            try {
-                // Cria o diretório se não existir
-                if (Files.notExists(caminhoRelativo)) {
-                    Files.createDirectories(caminhoRelativo);
-                    System.out.println("Diretório criado com sucesso: " + caminhoRelativo.toString());
-                } else {
-                    System.out.println("Diretório já existe: " + caminhoRelativo.toString());
-                }
-                // Define o caminho para o novo ficheiro na pasta 'ficheiros'
-                Path caminhoFicheiro = Paths.get(caminhoRelativo.toString(), "Equipas.txt");
-                // Cria o ficheiro se não existir
-                if (Files.notExists(caminhoFicheiro)) {
-                    Files.createFile(caminhoFicheiro);
-                    System.out.println("Ficheiro criado com sucesso: " + caminhoFicheiro.toString());
-                } else {
-                    System.out.println("Ficheiro já existe: " + caminhoFicheiro.toString());
-                }
-                // Escreve conteúdo no ficheiro
-                try (BufferedWriter writer = new BufferedWriter(new FileWriter(caminhoFicheiro.toFile(),true))) {
-                    writer.write("INICIO");
-                    writer.newLine();
-                    writer.write(this.nome+ " "+this.apelido+" "+this.fundacao+" ");
-                    writer.newLine();
-                    writer.write("Jogadores:");
-                    for (Jogador jogador: this.jogadores){
-                        writer.write("("+jogador.getId()+" "+jogador.getNome()+ " "+jogador.getApelido()+" "+jogador.getDataNascimento().toString()+" "+jogador.getNumero()+" "+jogador.getPosicao()+" "+jogador.getQualidade()+" ("+jogador.getCartoes()[0]+","+jogador.getCartoes()[1]+","+jogador.getCartoes()[2]+") "+jogador.getSuspenso()+" "+jogador.getTreinamento()+")");
-                    }
-                    writer.newLine();
-                    writer.write("Relacionados:");
-                    for (Jogador jogador : this.relacionados){
-                        writer.write("("+jogador.getId()+" "+jogador.getNome()+ " "+jogador.getApelido()+" "+jogador.getDataNascimento().toString()+" "+jogador.getNumero()+" "+jogador.getPosicao()+" "+jogador.getQualidade()+" ("+jogador.getCartoes()[0]+","+jogador.getCartoes()[1]+","+jogador.getCartoes()[2]+") "+jogador.getSuspenso()+" "+jogador.getTreinamento()+")");
-                    }
-                    writer.newLine();
-                    writer.write("FIM");
-                    writer.newLine();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public Equipa() {
